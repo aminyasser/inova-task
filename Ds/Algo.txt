@@ -1,0 +1,35 @@
+init queue[]
+
+func enqueue(element, priority)
+    if isFull()
+        return error "Queue is full"
+    else
+        if isEmpty()
+            rear = rear + 1
+            queue[rear] = element
+        else
+            # Find the correct position
+            i = rear
+            while i >= 0 && priority(queue[i]) < priority(element)
+                queue[i+1] = queue[i]
+                i = i - 1
+            queue[i+1] = element
+            rear = rear + 1
+
+func dequeue()
+    if isEmpty()
+        return error "Queue Empty"
+    else
+        front = front + 1
+        return queue[front]
+
+func isEmpty()
+    return front == rear
+
+func isFull()
+    return rear == size(queue) - 1
+
+
+
+## enqueue O(n)
+## dequeue O(1)    

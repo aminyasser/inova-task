@@ -1,0 +1,14 @@
+# using two pointers
+# O(n)
+func findMiddle(head)
+    if head == null
+        return null
+
+    p1 = head
+    p2 = head
+
+    while p2 != null and p2.next != null
+        p1 = p1.next
+        p2 = p2.next.next
+
+return p1
