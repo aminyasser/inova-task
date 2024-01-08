@@ -15,10 +15,10 @@ class PostsController < ApplicationController
     
     
     def top_posts
+        @posts = Post.joins(:reviews).group(:id).order('avg(reviews.rating) desc').page(params[:page])
+        render json: {top_posts: @posts.as_json(except: [:id]) }
     end
     
-
-
     def post_params
         params.permit(:title , :body , :user_id)
     end
