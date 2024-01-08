@@ -11,7 +11,12 @@ class PostsController < ApplicationController
         else
           render json: {status: 'error' , message: @post.errors.objects.first.full_message}, status:  :unprocessable_entity  
         end
-    end   
+    end 
+    
+    
+    def top_posts
+    end
+    
 
 
     def post_params

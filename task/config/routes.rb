@@ -8,5 +8,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   post "/posts", to: "posts#create"
   get "/users/:user_id/posts", to: "posts#user_posts"
+  post "/posts/:post_id/reviews", to: "reviews#create"
+  get "/posts/top", to: "posts#top_posts"
+
 
 end
