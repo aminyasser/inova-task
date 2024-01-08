@@ -7,7 +7,7 @@ class PostsController < ApplicationController
     def create
         @post = Post.create(post_params)
         if @post.valid?
-          render json: { status:'success' , message:'Post created successfully' , data: {post: @post }}, status: :created  
+          render json: { status:'success' , message:'Post created successfully' , post:  @post.as_json(except: [:id]) }, status: :created  
         else
           render json: {status: 'error' , message: @post.errors.objects.first.full_message}, status:  :unprocessable_entity  
         end
@@ -16,7 +16,7 @@ class PostsController < ApplicationController
     
     def top_posts
         @posts = Post.joins(:reviews).group(:id).order('avg(reviews.rating) desc').page(params[:page])
-        render json: {top_posts: @posts.as_json(except: [:id]) }
+        render json: { top_posts: @posts.as_json(except: [:id])}
     end
     
     def post_params
